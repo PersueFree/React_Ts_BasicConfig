@@ -1,0 +1,27 @@
+@import "./styles/global.less";
+
+body {
+  font-family:
+    system,
+    -apple-system,
+    "Helvetica",
+    "San Francisco",
+    Roboto,
+    "Helvetica Neue",
+    sans-serif;
+}
+
+#root {
+  height: 100%;
+  // 禁止移动端文本选择
+  user-select: none;
+}
+
+.adm-popup-body {
+  width: auto;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: calc(env(safe-area-inset-bottom) + 0.75rem);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}

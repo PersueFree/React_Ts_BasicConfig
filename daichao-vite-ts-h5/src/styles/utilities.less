@@ -1,0 +1,104 @@
+.clearfix:after {
+  clear: both;
+  content: "";
+  display: block;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+* html .clearfix {
+  height: 1%;
+}
+
+.clearfix {
+  display: block;
+}
+
+.fade-in {
+  -webkit-animation: fadeIn ease 0.3s forwards;
+  animation: fadeIn ease 0.3s forwards;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.hc {
+  clear: both;
+  font-size: 0;
+  height: 0;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.hide {
+  display: none;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-out {
+  -webkit-animation: fadeOut ease 0.3s forwards;
+  animation: fadeOut ease 0.3s forwards;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.slide-up {
+  -webkit-animation: slideUp ease 0.3s forwards;
+  animation: slideUp ease 0.3s forwards;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+.slide-down {
+  -webkit-animation: slideDown ease 0.3s forwards;
+  animation: slideDown ease 0.3s forwards;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+.hidden {
+  display: none;
+}
+
+/* 图片自适应 */
+img {
+  max-width: 100%;
+  height: auto;
+  width: auto\9; /* ie8 */
+  -ms-interpolation-mode: bicubic; /*为了照顾ie图片缩放失真*/
+}

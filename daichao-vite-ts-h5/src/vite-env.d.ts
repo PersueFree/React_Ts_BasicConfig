@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+
 import { Theme } from "styled-components";
 
 declare module "*.svg" {
