@@ -1,11 +1,11 @@
 export const AppConfig = {
-  schemeUrl: "ph://dami-credit/android",
-  productDetailsPath: "/",
-  forwardPrefix: "ph-dacr",
-  website: "http://8.220.149.181",
-  appName: "Dami Credit",
-  csEmail: "",
-  servicePhone: "",
+  schemeUrl: "ph://vamo/",
+  productDetailsPath: "/BoxerRebellion",
+  forwardPrefix: "ph-vamo",
+  website: "http://8.212.152.160",
+  appName: "Vamo",
+  csEmail: "cs@vamo.com",
+  companyName: "",
 
   background: "#016B76",
   bgFontColor: "#5DCC55",

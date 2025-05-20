@@ -18,6 +18,9 @@ declare module "styled-components" {
         colors: {
             primary: string;
             button: string;
+            orderNormalBg: string;
+            orderABNormalBg: string;
+            methodBg: string;
         };
         spacing: (multiplier?: number) => string;
     }

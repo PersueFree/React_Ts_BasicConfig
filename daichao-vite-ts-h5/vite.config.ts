@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 import path from "path";
 import autoprefixer from "autoprefixer";
-import { analyzer } from "vite-bundle-analyzer";
+// import { analyzer } from "vite-bundle-analyzer";
 import legacy from "@vitejs/plugin-legacy";
 
 // https://vite.dev/config/
@@ -14,10 +14,11 @@ export default defineConfig({
     host: true,
     open: true,
     proxy: {
-      "/ph-dacr": {
-        target: "http://8.220.149.181/ph-dacr",
+      "/ph-vamo": {
+        // http://8.212.152.160/ph-vamo
+        target: "http://8.212.152.160/ph-vamo",
         changeOrigin: true,
-      rewrite: (path) => path.replace(/^\/ph-dacr/, ""),
+      rewrite: (path) => path.replace(/^\/ph-vamo/, ""),
       }
     },
   },
@@ -28,6 +29,8 @@ export default defineConfig({
   },
   build: {
     outDir: "dist",
+    assetsDir: 'assets',
+    emptyOutDir: true,
     minify: "terser",
     sourcemap: false,
     chunkSizeWarningLimit: 600,
@@ -38,7 +41,7 @@ export default defineConfig({
       },
     },
     rollupOptions: {
-      external: ["styled-components"], // 避免重复打包styled-components
+      // external: ["styled-components"], // 避免重复打包styled-components
       output: {
         entryFileNames: "js/[name]-[hash].js",
         chunkFileNames: "js/[name]-[hash].js",
@@ -46,6 +49,13 @@ export default defineConfig({
           if (asset.name?.endsWith(".css")) {
             return "css/[name]-[hash].css";
           } else {
+            const extType = asset.name?.split('.')[1] || "";
+            if (/png|jpe?g|svg|gif|webp/i.test(extType)) {
+              return `assets/images/[name]-[hash][extname]`;
+            }
+            if (/woff2?|eot|ttf|otf/i.test(extType)) {
+              return `assets/fonts/[name]-[hash][extname]`;
+            }
             return "assets/[name]-[hash].[ext]";
           }
         },
@@ -84,6 +94,6 @@ export default defineConfig({
   }),
   tsconfigPaths({ loose: true }),
   legacy(),
-  analyzer(),
+  // analyzer(),
 ],
 });

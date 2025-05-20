@@ -1,7 +1,7 @@
 export interface resType<T> {
-    "oryfact": T;
-    "ateperfor": string;
-    "urelect": string;
+    "griefs": T;
+    "oddities": string;
+    "mortification": string;
 }
 
 export class ApiResponse<T> {
@@ -9,9 +9,9 @@ export class ApiResponse<T> {
     message: string;
     code: string;
     constructor(res: resType<T>) {
-        this.data = res["oryfact"];
-        this.message = res["ateperfor"];
-        this.code = res["urelect"];
+        this.data = res["griefs"];
+        this.message = res["oddities"];
+        this.code = res["mortification"];
     }
     get isSuccess(): boolean {
         return ["0", "00", "10086"].includes(this.code);

@@ -1,0 +1,51 @@
+{
+    "default": {
+        "affront": "Audit failed",
+        "disliking": "Your current product has a loan record of more than 3 days and is temporarily unable to apply!",
+        "provoke": "Repay other loan products on time and maintain a good repayment record, and your qualifications for using the current loan product can be restored.",
+        "yawned": [],
+        "recovery": [
+            {
+                "distressing": 1,
+                "professions": "product_name",
+                "welcomed": "http://ph-vplus-ios-files-prod.oss-ap-southeast-6.aliyuncs.com/202311/20231114203507_if04luzyxt.png?OSSAccessKeyId=LTAI5t78TGu6HedpoZRABpsN&Expires=1889181307&Signature=zkY5bTMbQDPPGGdtBultcE5VSfA%3D",
+                "contradict": "₱ 50,000",
+                "jealous": "121 Days",
+                "inferiority": "Loan terms",
+                "bewitched": "<=0.5% hari",
+                "archness": "Interest rate"
+            }
+        ]
+    },
+    "his002": {
+        "affront": "Audit failed",
+        "disliking": "Your current product has a loan record of more than 3 days and is temporarily unable to apply!",
+        "provoke": "Repay other loan products on time and maintain a good repayment record, and your qualifications for using the current loan product can be restored.",
+        "yawned": [],
+        "recovery": []
+    },
+    "his001": {
+        "affront": "Audit failed",
+        "disliking": "You currently have 2 loan orders that are overdue.After completing the repayment, you can apply for this loan product!",
+        "provoke": "",
+        "yawned": [
+            {
+                "pitiable": 27028,
+                "perforce": "http://kredit-agad-ios-files-prod.oss-ap-southeast-6.aliyuncs.com/202308/20230811181548_fhiv43fg5i.png?OSSAccessKeyId=LTAI5t78TGu6HedpoZRABpsN&Expires=1880964948&Signature=%2FA88tmUuVnwpvJ6lZOAqfWJdB8o%3D",
+                "grace": "Speed Loan(AA)",
+                "contradict": "3000.00",
+                "despise": "24-09-2023",
+                "vivacity": "https://kreditagad.com/#/confluence?laden=27028&seas=5&cried=212023091318262954131884"
+            },
+            {
+                "pitiable": 23368,
+                "perforce": "http://kredit-agad-ios-files-prod.oss-ap-southeast-6.aliyuncs.com/202308/20230811181646_cckov371gl.png?OSSAccessKeyId=LTAI5t78TGu6HedpoZRABpsN&Expires=1880965006&Signature=eOPBBJt9sFCUxdM3RFeTMDmEU1I%3D",
+                "grace": "Buddy loan(AA)",
+                "contradict": "3000.00",
+                "despise": "28-09-2023",
+                "vivacity": "https://kreditagad.com/#/confluence?laden=23368&seas=6&cried=212023090723280133945228"
+            }
+        ],
+        "recovery": []
+    }
+}

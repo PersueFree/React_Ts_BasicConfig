@@ -1,0 +1,114 @@
+{
+  "GCash": {
+    "deference": "",
+    "comparative": 0,
+    "particulars": "Note:Please keep the deposit slip as proof of payment",
+    "subsisting": 1747396515,
+    "intimacy": "Valid for 24 hours. lf it expires, you need to use anew repayment code to repay.",
+    "appertain": "https://ph-fenqi-files-prod.oss-ap-southeast-6.aliyuncs.com/others/p_logo_gcash.png",
+    "precision": "GCash",
+    "discuss": "PMX0A5680327203",
+    "occurs": "Friendly reminder: Any form of money transfer to a personalaccount is a scam, please do not believe it.",
+    "requester": [
+      {
+        "deserts": "Total Payment",
+        "impartial": "₱5080",
+        "fellows": ""
+      },
+      {
+        "deserts": "Biller",
+        "impartial": "PayerMax",
+        "fellows": ""
+      },
+      {
+        "deserts": "Payment Method",
+        "impartial": "GCash",
+        "fellows": ""
+      }
+    ],
+    "conviction": "",
+    "yield": "https://ph-fenqi-files-prod.oss-ap-southeast-6.aliyuncs.com/picture/ewallet.png",
+    "offering": 1,
+    "representation": ""
+  },
+  "BDO": {
+    "deference": "",
+    "comparative": 0,
+    "particulars": "Note:Please keep the deposit slip as proof of payment",
+    "subsisting": 1747396515,
+    "intimacy": "Valid for 24 hours. lf it expires, you need to use anew repayment code to repay.",
+    "appertain": "",
+    "precision": "BDO",
+    "discuss": "SKYEG6651534421",
+    "occurs": "Friendly reminder: Any form of money transfer to a personalaccount is a scam, please do not believe it.",
+    "requester": [
+      {
+        "deserts": "Total Payment",
+        "impartial": "₱5080",
+        "fellows": ""
+      },
+      {
+        "deserts": "Biller",
+        "impartial": "skypay",
+        "fellows": ""
+      },
+      {
+        "deserts": "Payment Method",
+        "impartial": "BDO",
+        "fellows": ""
+      }
+    ],
+    "conviction": "",
+    "yield": "https://ph-fenqi-files-prod.oss-ap-southeast-6.aliyuncs.com/picture/bank.png",
+    "offering": 2,
+    "representation": ""
+  },
+  "QrCode": {
+    "deference": "",
+    "comparative": 0,
+    "particulars": "Note:Please keep the deposit slip as proof of payment",
+    "subsisting": 1747396515,
+    "intimacy": "The QR code expiration is 15 minutes. Please regenerate it after expiration. <span style='color: #FF7700;'><i>It is recommended to use Gcash, Paymaya, ShopeePay, BDOPay, GrabPay for repayment as the success rate is higher.</i></span>",
+    "appertain": "https://ph-fenqi-files-prod.oss-ap-southeast-6.aliyuncs.com/others/QR-PH.png",
+    "precision": "QR-PH",
+    "discuss": "00020101021228820011ph.ppmi.p2m0111CUOBPHM2XXX0325f62776f3-f54e-4c3d-987b-10412893002332973050330052046016530360854071950.005802PH5914XLKASH LENDING6006TAGUIG630443F6",
+    "occurs": "Friendly reminder: Any form of money transfer to a personalaccount is a scam, please do not believe it.",
+    "requester": [],
+    "conviction": "",
+    "yield": "https://ph-fenqi-files-prod.oss-ap-southeast-6.aliyuncs.com/picture/qr.png",
+    "offering": 4,
+    "representation": "http://ph-fenqi-files-prod.oss-ap-southeast-6.aliyuncs.com/Youmi/qr-image/vcode2025051517391388310123.png?OSSAccessKeyId=LTAI5t78TGu6HedpoZRABpsN&Expires=1749101954&Signature=J3IqRwJRX%2FzYhSdAghrpl0%2FsMHY%3D"
+  },
+  "Transfer": {
+    "deference": "",
+    "comparative": 0,
+    "particulars": "Note:Please keep the deposit slip as proof of payment",
+    "subsisting": 1747396515,
+    "intimacy": "",
+    "appertain": "",
+    "precision": "Transfer",
+    "discuss": "945077354603",
+    "occurs": "1.The first seven digits of the Transfer account number are fixed at 9001136 or 9001138 or 90042116 or 90042117 or 94507. Any request to transfer funds to an account that does not follow this rule is fraud!<br>2.Please ensure the account information is correct, otherwise the repayment will not be successful and you may not be able to recover funds from an incorrect transfer.",
+    "requester": [
+      {
+        "deserts": "Total Payment",
+        "impartial": "₱ 5080",
+        "fellows": ""
+      },
+      {
+        "deserts": "Bank Name",
+        "impartial": "NetBank",
+        "fellows": ""
+      },
+      {
+        "deserts": "Account Name",
+        "impartial": "netbank",
+        "fellows": ""
+      }
+    ],
+    "conviction": "",
+    "yield": "https://ph-fenqi-files-prod.oss-ap-southeast-6.aliyuncs.com/picture/transfer.png",
+    "offering": 5,
+    "representation": ""
+  }
+}
