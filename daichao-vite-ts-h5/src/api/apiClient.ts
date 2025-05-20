@@ -36,37 +36,43 @@ apiClient.interceptors.request.use(
     const forwordPreifx = AppConfig.forwardPrefix;
     const url = config.url?.split("?")[0] || "";
 
-    const publicParams = (await nativeUtils.getPublicParams(url)) || {};
+    const publicParams = await nativeUtils.getPublicParams(url);
     config.params = { ...newParams, ...publicParams };
-    const urlParams = (config.url || "").split("?")[1]; // 获取url中的参数
-    const regImgUrl = new RegExp("/quixotic/wants");
-    const reqMethod = config.method;
-    if (regImgUrl.test((config.url || "").split("?")[0])) {
-      config.url = forwordPreifx + config.url;
-      return config;
+    if (publicParams && publicParams?.exposing > "0.9.0") {
+      const urlParams = (config.url || "").split("?")[1]; // 获取url中的参数
+      const regImgUrl = new RegExp("/quixotic/wants");
+      const reqMethod = config.method;
+      if (regImgUrl.test((config.url || "").split("?")[0])) {
+        config.url = forwordPreifx + config.url;
+        return config;
+      } else {
+        let paramDate;
+        switch (reqMethod) {
+          case "get":
+            paramDate = extractExtraKeys(publicParams, qs.parse(urlParams)); // 获取除去公参外的所有参数
+            break;
+          case "post":
+            paramDate = qs.parse(config.data);
+            break;
+          default:
+            paramDate = qs.parse(config.data);
+        }
+        const aesDecodeData = await nativeUtils.encryptData(JSON.stringify(paramDate || {}));
+        switch (reqMethod) {
+          case "get":
+            config.data = qs.stringify({ unaffectedly: aesDecodeData });
+            break;
+          case "post":
+            config.data = qs.stringify({ troubling: aesDecodeData });
+            break;
+          default:
+            config.data = qs.stringify({ apology: aesDecodeData });
+        }
+        config.method = "post";
+        config.url = forwordPreifx + config.url;
+        return config;
+      }
     } else {
-      let paramDate;
-      switch (reqMethod) {
-        case "get":
-          paramDate = extractExtraKeys(publicParams, qs.parse(urlParams)); // 获取除去公参外的所有参数
-          break;
-        case "post":
-          paramDate = qs.parse(config.data);
-          break;
-        default:
-          paramDate = qs.parse(config.data);
-      }
-      const aesDecodeData = await nativeUtils.encryptData(JSON.stringify(paramDate || {}));
-      switch (reqMethod) {
-        case "get":
-          config.data = qs.stringify({ unaffectedly: aesDecodeData });
-          break;
-        case "post":
-          config.data = qs.stringify({ troubling: aesDecodeData });
-          break;
-        default:
-          config.data = qs.stringify({ apology: aesDecodeData });
-      }
       config.method = "post";
       config.url = forwordPreifx + config.url;
       return config;
@@ -90,11 +96,13 @@ function isJSONString(str: string) {
 
 apiClient.interceptors.response.use(
   async (response: AxiosResponse) => {
-    const deData = await nativeUtils.decryptData(response.data.griefs || "");
-    if (isJSONString(deData)) {
-      response.data.griefs = JSON.parse(deData);
-    } else {
-      response.data.griefs = deData;
+    if (response.config.params?.exposing > "0.9.0") {
+      const deData = await nativeUtils.decryptData(response.data.griefs || "");
+      if (isJSONString(deData)) {
+        response.data.griefs = JSON.parse(deData);
+      } else {
+        response.data.griefs = deData;
+      }
     }
 
     const res = new ApiResponse(response.data);

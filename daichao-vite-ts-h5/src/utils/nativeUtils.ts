@@ -1,6 +1,20 @@
 import { getQueryParams } from "./getQueryParams";
 import nativeInteraction from "./nativeInteraction";
 
+interface PublicParamsType {
+  ["repeating"]?: string;
+  ["exposing"]: string | number;
+  ["tremble"]?: string;
+  ["ensued"]?: string;
+  ["sonnet"]?: string;
+  ["nourishes"]?: string;
+  ["stout"]?: string;
+  ["poetry"]?: string;
+  ["dinners"]?: string;
+  ["ordered"]?: string | number;
+  ["proprietor"]?: string;
+}
+
 export function uploadRiskLoan(productId, orderNo) {
   try {
     const params = getQueryParams();
@@ -78,7 +92,7 @@ export function saveQrcode(qrcode) {
     console.error(e);
   }
 }
-export function getPublicParams(url) {
+export const getPublicParams = (url: string): Promise<PublicParamsType> => {
   return new Promise((resolve, reject) => {
     try {
       nativeInteraction.getPublicParams(url, (data) => resolve(data));
@@ -87,7 +101,7 @@ export function getPublicParams(url) {
       reject(e);
     }
   });
-}
+};
 export function encryptData(data) {
   return new Promise((resolve, reject) => {
     try {
