@@ -73,6 +73,7 @@ const ComplaintList: FC = () => {
 
   const handleTabChange = (item?: TabData, key?: string) => {
     console.log("handleTabChange", item, key);
+    setListData(item?.list);
   };
 
   if (isLoading) {

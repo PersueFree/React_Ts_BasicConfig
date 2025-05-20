@@ -153,9 +153,14 @@ const ComplaintForm: FC = () => {
 
     const compressedFile = await compressImage(file);
     // blob转file, 因为大文件会被转成blob类型
-    let result = compressedFile;
-    result = new File([result], file.name, { type: file.type, lastModified: Date.now() });
-    const res = await submitCustomerServiceImage(result);
+    const processedFile =
+      compressedFile instanceof Blob
+        ? new File([compressedFile], file.name, {
+            type: file.type || "application/octet-stream",
+            lastModified: Date.now(),
+          })
+        : compressedFile;
+    const res = await submitCustomerServiceImage(processedFile);
     const data = UploadData.parseJson(res.data);
 
     Toast.show("Successful upload!");

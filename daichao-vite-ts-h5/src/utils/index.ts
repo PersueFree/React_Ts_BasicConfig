@@ -65,7 +65,7 @@ export const setPageTitle = (str: string) => {
   document.title = str;
 };
 
-export const compressImage = async (file: File) => {
+export const compressImage = async (file: File): Promise<File | Blob> => {
   const Compressor = (await import("compressorjs")).default;
 
   let quality = 1;

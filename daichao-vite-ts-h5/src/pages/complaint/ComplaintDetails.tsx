@@ -1,5 +1,5 @@
 import { ImageUploadItem, ImageUploader, Modal } from "antd-mobile";
-import { HtmlHTMLAttributes, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { getQueryParams } from "@/utils/getQueryParams";
 
@@ -17,7 +17,7 @@ import {
 // import styled from "styled-components";
 import { ScoreModal, ScoreResultModal, Toast } from "@/components";
 import { QuestionDetailsData } from "@/modules/QuestionDetailsData";
-import UploadData from "@/modules/UploadData";
+import { UploadData } from "@/modules/UploadData";
 import { compressImage, setPageTitle } from "@/utils";
 
 import "./ComplaintDetails.less";
@@ -128,6 +128,7 @@ const ComplaintDetails = () => {
     }
 
     Toast.showLoading("loading...");
+    setScoreModalVisible(false);
     try {
       await submitRating({
         questionId: params.problemId,
@@ -135,7 +136,6 @@ const ComplaintDetails = () => {
       });
       Toast.clear();
       setScoreResModalVisible(index < 4);
-      setScoreModalVisible(false);
     } catch (error) {
       if (error instanceof Error) {
         Toast.fail(error.message);
@@ -170,9 +170,14 @@ const ComplaintDetails = () => {
   const handleFileUpload = async (file: File): Promise<ImageUploadItem> => {
     const compressedFile = await compressImage(file);
     // blob转file, 因为大文件会被转成blob类型
-    let result = compressedFile;
-    result = new File([result], file.name, { type: file.type, lastModified: Date.now() });
-    const res = await submitCustomerServiceImage(result);
+    const processedFile =
+      compressedFile instanceof Blob
+        ? new File([compressedFile], file.name, {
+            type: file.type || "application/octet-stream",
+            lastModified: Date.now(),
+          })
+        : compressedFile;
+    const res = await submitCustomerServiceImage(processedFile);
     const data = UploadData.parseJson(res.data);
 
     return {
@@ -425,13 +430,11 @@ const ComplaintDetails = () => {
       />
 
       {/* 评分功能弹窗 */}
-      {
-        <ScoreModal
-          visible={scoreModalVisible}
-          onClose={() => setScoreModalVisible(false)}
-          onSubmit={(value) => handleScoreSubmit(value)}
-        />
-      }
+      <ScoreModal
+        visible={scoreModalVisible}
+        onClose={() => setScoreModalVisible(false)}
+        onSubmit={(value) => handleScoreSubmit(value)}
+      />
 
       {/*  评分结果弹窗 */}
       <ScoreResultModal

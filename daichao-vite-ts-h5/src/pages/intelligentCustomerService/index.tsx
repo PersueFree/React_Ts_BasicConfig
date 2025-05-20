@@ -96,8 +96,7 @@ const IntelligentCustomerService: FC = () => {
       reportResultData: "",
       date: _currentDate(),
     };
-    answerDataList.push(result);
-    setAnswerDataList(answerDataList);
+    setAnswerDataList(prev => [...prev, result]);
   };
 
   // 收集评分数据上报
@@ -119,7 +118,6 @@ const IntelligentCustomerService: FC = () => {
       });
       Toast.clear();
       if (type === 2 || type === 4) {
-        const list = answerDataList;
         const result = {
           answerList: [],
           question: {
@@ -129,8 +127,7 @@ const IntelligentCustomerService: FC = () => {
           date: _currentDate(),
         };
 
-        list.push(result);
-        setAnswerDataList(list);
+        setAnswerDataList(prev => [...prev, result]);
       }
       if (type === 3) {
         if (value < 4) {
@@ -150,15 +147,15 @@ const IntelligentCustomerService: FC = () => {
   };
 
   // 提交评分
-  const handleScoreSubmit = (clickIndex: number) => {
+  const handleScoreSubmit = async (clickIndex: number) => {
     if (clickIndex == 0) {
       Toast.show("Please select");
       return;
     }
     setScoreModalVisible(false);
-    setScoreResModalVisible(clickIndex < 4);
     setScoreResTitle("");
-    submitQuestionRecordData(3, clickIndex, currentQuestionId);
+    await submitQuestionRecordData(3, clickIndex, currentQuestionId);
+    setScoreResModalVisible(clickIndex < 4);
   };
 
   const handleSelectDetailType = (item: Answer, index: number) => {
@@ -176,7 +173,7 @@ const IntelligentCustomerService: FC = () => {
     fetchData(item.id);
   };
 
-  const handleResolvedClick = (item: AnswerDataListProps, index: number) => {
+  const handleResolvedClick = async (item: AnswerDataListProps, index: number) => {
     console.log("handleResolvedClick", item);
     if (item.answerList) {
       item.answerList[0].zanClick = true;
@@ -186,10 +183,10 @@ const IntelligentCustomerService: FC = () => {
     data[index] = item;
 
     setAnswerDataList(data);
-    setScoreModalVisible(true);
     setCurrentQuestionId(item.question?.id);
-
-    submitQuestionRecordData(2, 1, item.question?.id);
+    
+    await submitQuestionRecordData(2, 1, item.question?.id);
+    setScoreModalVisible(true);
   };
 
   const handleNotResolvedClick = (item: AnswerDataListProps, index: number) => {
@@ -214,7 +211,6 @@ const IntelligentCustomerService: FC = () => {
 
   const handleSendButtonClick = () => {
     if (inputValue.length > 0) {
-      const list = answerDataList;
       const result = {
         answerList: [],
         fork: {
@@ -223,10 +219,9 @@ const IntelligentCustomerService: FC = () => {
         reportResultData: "",
         date: _currentDate(),
       };
-      list.push(result);
       submitQuestionRecordData(4, Number(inputValue));
       setInputValue("");
-      setAnswerDataList(list);
+      setAnswerDataList(prev => [...prev, result]);
     }
   };
 
