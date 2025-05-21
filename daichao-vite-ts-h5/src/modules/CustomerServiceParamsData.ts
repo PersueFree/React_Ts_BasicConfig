@@ -1,9 +1,3 @@
-// 基础项接口（合并ProblemTypeItem和ProblemStatusItem）
-interface CommonItem {
-  title?: string;
-  value?: string | number;
-}
-
 // 原始数据接口（保持[""]写法）
 interface RawStatusItem {
   ["recreation"]: string;
@@ -36,8 +30,13 @@ interface RawCustomerServiceData {
   ["modesty"]?: RawOrderItem[];
 }
 
+interface CommonItemTypes {
+  title?: string;
+  value?: string | number;
+}
+
 // 处理后数据接口
-interface OrderItem {
+interface OrderItemTypes {
   orderNo?: string;
   productLogo?: string;
   productName?: string;
@@ -50,10 +49,10 @@ interface OrderItem {
 }
 
 class CustomerServiceParamsData {
-  problemStatus?: CommonItem[];
-  problemType?: CommonItem[];
-  orderDetail?: OrderItem;
-  orderList?: OrderItem[];
+  problemStatus?: CommonItemTypes[];
+  problemType?: CommonItemTypes[];
+  orderDetail?: OrderItemTypes;
+  orderList?: OrderItemTypes[];
 
   constructor({
     problemStatus,
@@ -61,10 +60,10 @@ class CustomerServiceParamsData {
     orderDetail,
     orderList,
   }: {
-    problemStatus?: CommonItem[];
-    problemType?: CommonItem[];
-    orderDetail?: OrderItem;
-    orderList?: OrderItem[];
+    problemStatus?: CommonItemTypes[];
+    problemType?: CommonItemTypes[];
+    orderDetail?: OrderItemTypes;
+    orderList?: OrderItemTypes[];
   } = {}) {
     this.problemStatus = problemStatus;
     this.problemType = problemType;
@@ -81,25 +80,25 @@ class CustomerServiceParamsData {
       orderDetail: this.processOrderItem(data["rapidity"]),
       orderList: data["modesty"]
         ?.map((item) => this.processOrderItem(item))
-        .filter((item): item is OrderItem => item !== undefined),
+        .filter((item): item is OrderItemTypes => item !== undefined),
     });
   }
 
-  private static processStatus(data?: RawStatusItem[]): CommonItem[] | undefined {
+  private static processStatus(data?: RawStatusItem[]): CommonItemTypes[] | undefined {
     return data?.map((item) => ({
       title: item["recreation"],
       value: item["impartial"],
     }));
   }
 
-  private static processProblemType(data?: RawProblemTypeItem[]): CommonItem[] | undefined {
+  private static processProblemType(data?: RawProblemTypeItem[]): CommonItemTypes[] | undefined {
     return data?.map((item) => ({
       title: item["recreation"],
       value: item["impartial"],
     }));
   }
 
-  private static processOrderItem(item?: RawOrderItem): OrderItem | undefined {
+  private static processOrderItem(item?: RawOrderItem): OrderItemTypes | undefined {
     if (!item) return undefined;
 
     return {
@@ -117,4 +116,4 @@ class CustomerServiceParamsData {
 }
 
 export { CustomerServiceParamsData };
-export type { OrderItem };
+export type { OrderItemTypes, CommonItemTypes };

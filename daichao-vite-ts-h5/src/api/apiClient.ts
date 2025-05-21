@@ -9,11 +9,8 @@ import qs from "query-string";
 
 import nativeUtils from "@/utils/nativeUtils";
 
-// import { getQueryParams } from '@/utils/getQueryParams';
 import { AppConfig } from "@/AppConfig";
 import { ApiResponse } from "@/modules/ApiResponse";
-
-// const params = getQueryParams();
 
 const apiClient: AxiosInstance = axios.create({
   timeout: 60000,
@@ -21,14 +18,6 @@ const apiClient: AxiosInstance = axios.create({
     "X-Requested-With": "XMLHttpRequest",
   } as AxiosRequestConfig["headers"],
 });
-
-const extractExtraKeys = (a, b) =>
-  Object.keys(b).reduce((acc, key) => {
-    if (!(key in a)) {
-      acc[key] = b[key];
-    }
-    return acc;
-  }, {});
 
 apiClient.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
@@ -38,41 +27,34 @@ apiClient.interceptors.request.use(
 
     const publicParams = await nativeUtils.getPublicParams(url);
     config.params = { ...newParams, ...publicParams };
-    if (publicParams && publicParams?.exposing > "0.9.0") {
-      const urlParams = (config.url || "").split("?")[1]; // 获取url中的参数
-      const regImgUrl = new RegExp("/quixotic/wants");
-      const reqMethod = config.method;
-      if (regImgUrl.test((config.url || "").split("?")[0])) {
-        config.url = forwordPreifx + config.url;
-        return config;
-      } else {
-        let paramDate;
-        switch (reqMethod) {
-          case "get":
-            paramDate = extractExtraKeys(publicParams, qs.parse(urlParams)); // 获取除去公参外的所有参数
-            break;
-          case "post":
-            paramDate = qs.parse(config.data);
-            break;
-          default:
-            paramDate = qs.parse(config.data);
-        }
-        const aesDecodeData = await nativeUtils.encryptData(JSON.stringify(paramDate || {}));
-        switch (reqMethod) {
-          case "get":
-            config.data = qs.stringify({ unaffectedly: aesDecodeData });
-            break;
-          case "post":
-            config.data = qs.stringify({ troubling: aesDecodeData });
-            break;
-          default:
-            config.data = qs.stringify({ apology: aesDecodeData });
-        }
-        config.method = "post";
-        config.url = forwordPreifx + config.url;
-        return config;
-      }
+    const regImgUrl = new RegExp("/quixotic/wants");
+    const reqMethod = config.method;
+    if (regImgUrl.test((config.url || "").split("?")[0])) {
+      config.url = forwordPreifx + config.url;
+      return config;
     } else {
+      let paramDate;
+      switch (reqMethod) {
+        case "get":
+          paramDate = newParams; // 获取除去公参外的所有参数
+          break;
+        case "post":
+          paramDate = qs.parse(config.data);
+          break;
+        default:
+          paramDate = qs.parse(config.data);
+      }
+      const aesDecodeData = await nativeUtils.encryptData(JSON.stringify(paramDate || {}));
+      switch (reqMethod) {
+        case "get":
+          config.data = qs.stringify({ unaffectedly: aesDecodeData });
+          break;
+        case "post":
+          config.data = qs.stringify({ troubling: aesDecodeData });
+          break;
+        default:
+          config.data = qs.stringify({ apology: aesDecodeData });
+      }
       config.method = "post";
       config.url = forwordPreifx + config.url;
       return config;

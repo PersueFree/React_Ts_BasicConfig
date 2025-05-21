@@ -3,7 +3,7 @@ import { FC } from "react";
 import styled from "styled-components";
 
 import { AppConfig } from "@/AppConfig";
-import type { TabData, ComplaintListData } from "@/modules/ComplaintListData";
+import type { ComplaintListData, TabDataTypes } from "@/modules/ComplaintListData";
 
 const Container = styled.div`
   width: 100%;
@@ -13,7 +13,7 @@ const Container = styled.div`
 interface ComplaintTabsProps {
   defaultActiveKey?: string;
   items: ComplaintListData["tabsData"];
-  onChange(item?: TabData, key?: string): void;
+  onChange(item?: TabDataTypes, key?: string): void;
 }
 
 const ComplaintTabs: FC<ComplaintTabsProps> = ({ defaultActiveKey, items, onChange }) => {

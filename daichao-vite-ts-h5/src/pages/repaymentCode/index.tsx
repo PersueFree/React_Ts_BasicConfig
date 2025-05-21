@@ -289,12 +289,15 @@ const RepaymentCodePage: FC = () => {
                   <RepayTipIcon src={repaymentCodeImages.TIP_BELL} />
                   <RepayTipContent>
                     <RepayTip
-                      dangerouslySetInnerHTML={{
-                        __html:
-                          repayData?.repayType == 5
-                            ? repayData?.repaymentCommonData?.repaymentNote
-                            : repayData?.repaymentCountdownData?.expiredTimeText,
-                      }}
+                      dangerouslySetInnerHTML={
+                        repayData?.repayType == 5
+                          ? {
+                              __html: repayData?.repaymentCommonData?.repaymentNote ?? "",
+                            }
+                          : {
+                              __html: repayData?.repaymentCountdownData?.expiredTimeText ?? "",
+                            }
+                      }
                     />
                   </RepayTipContent>
                 </RepayDateTip>

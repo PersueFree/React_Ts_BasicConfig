@@ -7,11 +7,29 @@ import { randomStr } from "@/utils";
 import { apiClient } from "./apiClient";
 import { ApiConstants } from "./apiConstants";
 
+interface CSQuestionParams {
+  questionType?: number;
+  sonQuestion?: string | number;
+  questionDesc: string;
+  imageUrl: string;
+  orderNo: string | null;
+}
+
+interface FeedbackParams {
+  orderNo?: string;
+  type?: string | number;
+  content?: number | string;
+  questionId?: string | number;
+}
+
 /// 点击申请 / 准入接口
-export const fetchProductAccessData = async (
-  productId: string | number | undefined,
-  scene: string | number,
-) => {
+export const fetchProductAccessData = async ({
+  productId,
+  scene,
+}: {
+  productId: string | number | undefined;
+  scene: string | number;
+}) => {
   const urlParams = getQueryParams();
   scene = scene || (urlParams["ousconsci"] == "cgl_not_re_loan" ? 6 : 7);
   productId = productId || urlParams["eamcr"] || urlParams["lsefa"];
@@ -159,7 +177,7 @@ export const saveQrcodeRecord = async (qrcode?: string) => {
 };
 
 /// 推荐列表
-export async function fetchRecommendationList() {
+export const fetchRecommendationList = async () => {
   const urlParams = getQueryParams();
   const params = {
     // 场景页面 cgl_not_re_loan->复贷客群,cgl_api_not_loan-> api上新弹窗客群
@@ -167,7 +185,7 @@ export async function fetchRecommendationList() {
   };
   const response = await apiClient.post(ApiConstants.RECOMMENDATION_LIST, qs.stringify(params));
   return response;
-}
+};
 
 /// 借款协议
 export const fetchBorrowMoney = async () => {
@@ -181,7 +199,7 @@ export const fetchBorrowMoney = async () => {
 };
 
 /// 客服参数初始化
-export const fetchCustomerServiceParams = async (orderNo) => {
+export const fetchCustomerServiceParams = async (orderNo?: string) => {
   const urlParams = getQueryParams();
   orderNo = orderNo || urlParams["tempered"];
 
@@ -196,7 +214,7 @@ export const fetchCustomerServiceParams = async (orderNo) => {
 };
 
 /// 客服图片提交
-export async function submitCustomerServiceImage(file: File) {
+export const submitCustomerServiceImage = async (file: File) => {
   const formData = new FormData();
   // 资源文件
   formData.append("occupied", file);
@@ -207,16 +225,16 @@ export async function submitCustomerServiceImage(file: File) {
 
   const response = await apiClient.post(ApiConstants.SUBMIT_CUSTOMER_SERVICE_IMAGE, formData);
   return response;
-}
+};
 
 /// 客服问题提交
-export async function submitCustomerServiceQuestion({
+export const submitCustomerServiceQuestion = async ({
   questionType,
   sonQuestion,
   questionDesc,
   imageUrl,
   orderNo,
-}) {
+}: CSQuestionParams) => {
   const params = {
     //	问题类型
     "execution": questionType,
@@ -237,10 +255,18 @@ export async function submitCustomerServiceQuestion({
     qs.stringify(params),
   );
   return response;
-}
+};
 
 /// 用户补充信息
-export async function submitQuestionAdditionalInfo({ questionId, content, imageUrls }) {
+export const submitQuestionAdditionalInfo = async ({
+  questionId,
+  content,
+  imageUrls,
+}: {
+  questionId: string;
+  content?: string;
+  imageUrls?: string | null;
+}) => {
   const params = {
     // 客服问题id
     "convey": questionId,
@@ -255,10 +281,10 @@ export async function submitQuestionAdditionalInfo({ questionId, content, imageU
     qs.stringify(params),
   );
   return response;
-}
+};
 
 /// 用户结束补充反馈
-export async function submitEndQuestionFeedback(questionId) {
+export const submitEndQuestionFeedback = async (questionId: string) => {
   const params = {
     // 客服问题id
     "convey": questionId,
@@ -271,7 +297,7 @@ export async function submitEndQuestionFeedback(questionId) {
     qs.stringify(params),
   );
   return response;
-}
+};
 
 /// 客服提交列表
 export const fetchCustomerServiceSubmissionList = async () => {
@@ -287,7 +313,7 @@ export const fetchCustomerServiceSubmissionList = async () => {
 };
 
 /// 客服问题详情页
-export const fetchCustomerServiceQuestionDetails = async (questionId) => {
+export const fetchCustomerServiceQuestionDetails = async (questionId: string) => {
   const params = {
     /// 客服问题id
     "convey": questionId,
@@ -321,7 +347,13 @@ export const fetchQuestionList = async (
 };
 
 /// 问题是否解决
-export const submitQuestionResolvedStatus = async ({ questionId, resolved }) => {
+export const submitQuestionResolvedStatus = async ({
+  questionId,
+  resolved,
+}: {
+  questionId: string;
+  resolved: boolean;
+}) => {
   const params = {
     // 问题id
     "convey": questionId,
@@ -341,7 +373,13 @@ export const submitQuestionResolvedStatus = async ({ questionId, resolved }) => 
 };
 
 /// 评价
-export const submitRating = async ({ questionId, score }) => {
+export const submitRating = async ({
+  questionId,
+  score,
+}: {
+  questionId: string;
+  score: number;
+}) => {
   const params = {
     // 问题id
     "convey": questionId,
@@ -357,12 +395,6 @@ export const submitRating = async ({ questionId, score }) => {
   return response;
 };
 
-interface FeedbackParams {
-  orderNo?: string;
-  type?: string | number;
-  content?: number | string;
-  questionId?: string | number;
-}
 /// 收集智能客服点击、评价、打分、评论
 export const submitCustomerServiceFeedback = async ({
   orderNo,

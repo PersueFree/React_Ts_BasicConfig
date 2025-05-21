@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { fetchCustomerServiceSubmissionList } from "@/api";
 import { Toast } from "@/components";
 import { ComplaintListData } from "@/modules/ComplaintListData";
-import type { ComplaintItemFun, TabData } from "@/modules/ComplaintListData";
+import type { ComplaintItemFunTypes, TabDataTypes } from "@/modules/ComplaintListData";
 import { setPageTitle } from "@/utils";
 
 import { ComplaintItem } from "./components/ComplaintItem";
@@ -30,7 +30,7 @@ const ComplaintList: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [tabsData, setTabsData] = useState<ComplaintListData["tabsData"]>([]);
   // const [activeKey, setActiveKey] = useState<string | number | undefined>();
-  const [listData, setListData] = useState<ComplaintItemFun[] | null>();
+  const [listData, setListData] = useState<ComplaintItemFunTypes[] | null>();
 
   useEffect(() => {
     setPageTitle("Input List");
@@ -71,7 +71,7 @@ const ComplaintList: FC = () => {
     }
   };
 
-  const handleTabChange = (item?: TabData, key?: string) => {
+  const handleTabChange = (item?: TabDataTypes, key?: string) => {
     console.log("handleTabChange", item, key);
     setListData(item?.list);
   };
@@ -85,7 +85,7 @@ const ComplaintList: FC = () => {
       <div>
         <ComplaintTabs
           items={tabsData}
-          onChange={(item?: TabData, key?: string) => handleTabChange(item, key)}
+          onChange={(item?: TabDataTypes, key?: string) => handleTabChange(item, key)}
         />
       </div>
 

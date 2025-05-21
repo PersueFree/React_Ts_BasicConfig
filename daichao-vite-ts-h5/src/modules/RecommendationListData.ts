@@ -1,14 +1,3 @@
-interface ProductData {
-  productId?: number;
-  productLogo?: string;
-  productName?: string;
-  amount?: string | number;
-  loanTermsText?: string;
-  loanTerms?: string;
-  interestRateText?: string;
-  interestRate?: string;
-}
-
 interface RawProductData {
   ["distressing"]: number; // 产品ID
   ["professions"]: string; // 产品名称
@@ -20,10 +9,21 @@ interface RawProductData {
   ["archness"]: string; // 利率说明文本
 }
 
-class RecommendationListData {
-  recProducts: ProductData[];
+interface ProductDataTypes {
+  productId?: number;
+  productLogo?: string;
+  productName?: string;
+  amount?: string | number;
+  loanTermsText?: string;
+  loanTerms?: string;
+  interestRateText?: string;
+  interestRate?: string;
+}
 
-  constructor({ recProducts }: { recProducts?: ProductData[] }) {
+class RecommendationListData {
+  recProducts: ProductDataTypes[];
+
+  constructor({ recProducts }: { recProducts?: ProductDataTypes[] }) {
     this.recProducts = recProducts || [];
   }
 
@@ -37,7 +37,7 @@ class RecommendationListData {
     });
   }
 
-  static processProductData(data?: RawProductData): ProductData {
+  static processProductData(data?: RawProductData): ProductDataTypes {
     if (!data) return {};
 
     return {
@@ -54,3 +54,4 @@ class RecommendationListData {
 }
 
 export { RecommendationListData };
+export type { ProductDataTypes };

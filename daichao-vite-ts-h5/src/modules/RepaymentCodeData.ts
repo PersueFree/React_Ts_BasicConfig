@@ -1,28 +1,3 @@
-interface RepaymentCommonData {
-  repaymentCode?: string;
-  repayType?: number; // 1: 钱包, 2: 银行, 3: 线下门店
-  repayLogo?: string;
-  repayName?: string;
-  repaymentNote?: string;
-}
-
-interface RepaymentQrcodeData {
-  repaymentCode?: string;
-  repaymentCodeUrl?: string;
-  repaymentNote?: string;
-}
-
-interface RepaymentDetailItem {
-  text?: string;
-  value?: string;
-  note?: string;
-}
-
-interface RepaymentCountdownData {
-  expiredTime?: number;
-  expiredTimeText?: string;
-}
-
 interface RawRepaymentCodeData {
   ["deference"]: string;
   ["comparative"]: number;
@@ -44,6 +19,31 @@ interface RawRepaymentCodeData {
   ["representation"]: string;
 }
 
+interface RepaymentCommonDataTypes {
+  repaymentCode?: string;
+  repayType?: number; // 1: 钱包, 2: 银行, 3: 线下门店
+  repayLogo?: string;
+  repayName?: string;
+  repaymentNote?: string;
+}
+
+interface RepaymentQrcodeDataTypes {
+  repaymentCode?: string;
+  repaymentCodeUrl?: string;
+  repaymentNote?: string;
+}
+
+interface RepaymentDetailItemTypes {
+  text?: string;
+  value?: string;
+  note?: string;
+}
+
+interface RepaymentCountdownDataTypes {
+  expiredTime?: number;
+  expiredTimeText?: string;
+}
+
 class RepaymentCodeData {
   isToJump: boolean | number;
   repayUrl?: string;
@@ -51,10 +51,10 @@ class RepaymentCodeData {
   upperNote?: string;
   repayGuidImg?: string;
   barcode?: string;
-  repaymentCommonData?: RepaymentCommonData | null;
-  repaymentQrcodeData?: RepaymentQrcodeData | null;
-  repaymentDetailsData?: RepaymentDetailItem[];
-  repaymentCountdownData?: RepaymentCountdownData;
+  repaymentCommonData?: RepaymentCommonDataTypes | null;
+  repaymentQrcodeData?: RepaymentQrcodeDataTypes | null;
+  repaymentDetailsData?: RepaymentDetailItemTypes[];
+  repaymentCountdownData?: RepaymentCountdownDataTypes;
 
   constructor({
     isToJump,
@@ -74,10 +74,10 @@ class RepaymentCodeData {
     upperNote?: string;
     repayGuidImg?: string;
     barcode?: string;
-    repaymentCommonData?: RepaymentCommonData | null;
-    repaymentQrcodeData?: RepaymentQrcodeData | null;
-    repaymentDetailsData?: RepaymentDetailItem[];
-    repaymentCountdownData?: RepaymentCountdownData;
+    repaymentCommonData?: RepaymentCommonDataTypes | null;
+    repaymentQrcodeData?: RepaymentQrcodeDataTypes | null;
+    repaymentDetailsData?: RepaymentDetailItemTypes[];
+    repaymentCountdownData?: RepaymentCountdownDataTypes;
   }) {
     this.isToJump = isToJump;
     this.repayUrl = repayUrl;
@@ -108,7 +108,7 @@ class RepaymentCodeData {
     });
   }
 
-  static processRepaymentCommonData(data: RawRepaymentCodeData): RepaymentCommonData | null {
+  static processRepaymentCommonData(data: RawRepaymentCodeData): RepaymentCommonDataTypes | null {
     if (!data) return null;
 
     const repayType = data["offering"];
@@ -124,7 +124,7 @@ class RepaymentCodeData {
       : null;
   }
 
-  static processRepaymentQrcodeData(data: RawRepaymentCodeData): RepaymentQrcodeData | null {
+  static processRepaymentQrcodeData(data: RawRepaymentCodeData): RepaymentQrcodeDataTypes | null {
     if (!data) return null;
 
     const repayType = data["offering"];
@@ -144,7 +144,7 @@ class RepaymentCodeData {
       impartial?: string;
       fellows?: string;
     }>,
-  ): RepaymentDetailItem[] | undefined {
+  ): RepaymentDetailItemTypes[] | undefined {
     return data?.map((item) => ({
       text: item["deserts"],
       value: item["impartial"],
@@ -154,7 +154,7 @@ class RepaymentCodeData {
 
   static processRepaymentCountdownData(
     data: RawRepaymentCodeData,
-  ): RepaymentCountdownData | undefined {
+  ): RepaymentCountdownDataTypes | undefined {
     return (
       data && {
         expiredTime: data["subsisting"],
@@ -165,3 +165,9 @@ class RepaymentCodeData {
 }
 
 export { RepaymentCodeData };
+export type {
+  RepaymentCommonDataTypes,
+  RepaymentQrcodeDataTypes,
+  RepaymentDetailItemTypes,
+  RepaymentCountdownDataTypes,
+};

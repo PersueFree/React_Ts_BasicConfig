@@ -31,22 +31,22 @@ interface StrictRepaymentMethodsData {
   }>;
 }
 
-interface PaymentMethodItemType {
+interface PaymentMethodItemTypes {
   type?: string | number;
   name?: string;
   logo?: string;
   status?: number; // 1: 可用, 0: 维护中
 }
 
-interface TabData {
+interface TabDataTypes {
   name: string;
-  list: PaymentMethodItemType[];
+  list: PaymentMethodItemTypes[];
 }
 
 class RepaymentMethodsData {
-  tabsData: TabData[] | null;
+  tabsData: TabDataTypes[] | null;
 
-  constructor({ tabsData }: { tabsData: TabData[] | null }) {
+  constructor({ tabsData }: { tabsData: TabDataTypes[] | null }) {
     this.tabsData = tabsData;
   }
 
@@ -58,7 +58,7 @@ class RepaymentMethodsData {
     });
   }
 
-  static processTabsData(data: StrictRepaymentMethodsData): TabData[] | null {
+  static processTabsData(data: StrictRepaymentMethodsData): TabDataTypes[] | null {
     console.log("processTabsData", data);
     if (data == null) {
       return null;
@@ -70,7 +70,7 @@ class RepaymentMethodsData {
     const transfer = data["domestic"];
     const overTheCounter = data["eyelashes"];
 
-    let result: TabData[] = [
+    let result: TabDataTypes[] = [
       {
         name: "Billpayment",
         list: ewallet ? this.processItems(ewallet) : [],
@@ -99,7 +99,7 @@ class RepaymentMethodsData {
     return result;
   }
 
-  static processItems(listData: EWallets[] | undefined): PaymentMethodItemType[] {
+  static processItems(listData: EWallets[] | undefined): PaymentMethodItemTypes[] {
     const list = listData || [];
     return list.map((item) => ({
       type: item["shoe"],
@@ -111,4 +111,4 @@ class RepaymentMethodsData {
 }
 
 export { RepaymentMethodsData };
-export type { PaymentMethodItemType };
+export type { PaymentMethodItemTypes, TabDataTypes };

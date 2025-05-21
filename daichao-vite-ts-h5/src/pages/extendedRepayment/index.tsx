@@ -2,91 +2,16 @@ import qs from "query-string";
 import { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 
+import type { DueDateProps } from "@/pages/singlePeriodRepayment/type";
+
 import { getQueryParams } from "@/utils/getQueryParams";
 
 import { fetchExtendedRepayDetails } from "@/api";
-import { Container, Toast } from "@/components";
+import { Container, DateComponent, Toast } from "@/components";
 // import mock_extendedRepayment from "@/mock/mock_extendedRepayment.json";
 import { ExtendedRepaymentData } from "@/modules/ExtendedRepaymentData";
 import { RouterConfig } from "@/router/routerConfig";
 import { setPageTitle } from "@/utils";
-
-const TopContent = styled.div<{ $isOverdue: boolean }>`
-  width: 100%;
-  background: ${(props) =>
-    props.$isOverdue ? props.theme.colors.orderABNormalBg : props.theme.colors.orderNormalBg};
-  border-radius: 1.1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 0.55rem;
-`;
-const Title = styled.div`
-  font-family: Helvetica;
-  font-size: 0.7rem;
-  color: #ffffff;
-  line-height: 0.8rem;
-  text-align: left;
-  font-style: normal;
-  text-transform: none;
-
-  padding: 0.75rem 0 0.2rem;
-`;
-const DateContent = styled.div`
-  display: flex;
-
-  gap: 0.5rem;
-`;
-const DateItemBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: #ffffff;
-  border-radius: 0.5rem;
-`;
-const DateType = styled.div`
-  border-bottom: 0.05rem solid #ffb84a;
-  padding: 0.35rem 0;
-
-  font-family: Helvetica, Helvetica;
-  font-weight: bold;
-  font-size: 0.5rem;
-  color: #d8c9bb;
-  line-height: 0.6rem;
-  text-align: center;
-  font-style: normal;
-`;
-const DateItem = styled.div`
-  padding: 0.6rem 1rem;
-
-  display: flex;
-  gap: 0.25rem;
-`;
-const Item = styled.div<{ $isOverdue?: boolean }>`
-  padding: 0.2rem 0.55rem;
-  background: ${(props) => (props.$isOverdue ? "#ff7a00" : "#69E1D2")};
-  border-radius: 0.25rem;
-
-  font-family: Helvetica, Helvetica;
-  font-weight: bold;
-  font-size: 1.8rem;
-  color: ${(props) => (props.$isOverdue ? "#fffed0" : "#115560")};
-  line-height: 2.15rem;
-  text-align: center;
-  font-style: normal;
-`;
-const TipContent = styled.div`
-  padding: 0.55rem 2.15rem;
-  background: rgba(255, 255, 255, 0.32);
-
-  font-family: Helvetica;
-  font-size: 0.6rem;
-  color: #333333;
-  line-height: 0.8rem;
-  text-align: center;
-  font-style: normal;
-  text-transform: none;
-`;
 
 const RepayContent = styled.div`
   background: #f1f2ff;
@@ -322,14 +247,6 @@ const Button = styled.div`
   align-items: center;
 `;
 
-interface DueDateProps {
-  monthTen: string;
-  monthUnits: string;
-  dayTen: string;
-  dayUnits: string;
-  daysDiff?: number;
-}
-
 const ExtendedRepayment: FC = () => {
   const [extendRepaymentData, setExtendRepaymentData] = useState<ExtendedRepaymentData | null>();
   const [dueDate, setDueDate] = useState<Partial<DueDateProps>>();
@@ -411,34 +328,7 @@ const ExtendedRepayment: FC = () => {
 
   return (
     <Container $paddingBottom='8rem'>
-      <TopContent $isOverdue={!!extendRepaymentData?.overdueDay}>
-        <Title>Current due date</Title>
-        <DateContent>
-          <DateItemBox>
-            <DateType>Mouth</DateType>
-            <DateItem>
-              <Item $isOverdue={!!extendRepaymentData?.overdueDay}>{dueDate?.monthTen}</Item>
-              <Item $isOverdue={!!extendRepaymentData?.overdueDay}>{dueDate?.monthUnits}</Item>
-            </DateItem>
-          </DateItemBox>
-          <DateItemBox>
-            <DateType>Day</DateType>
-            <DateItem>
-              <Item $isOverdue={!!extendRepaymentData?.overdueDay}>{dueDate?.dayTen}</Item>
-              <Item $isOverdue={!!extendRepaymentData?.overdueDay}>{dueDate?.dayUnits}</Item>
-            </DateItem>
-          </DateItemBox>
-        </DateContent>
-        <TipContent>
-          The nearest due date has &nbsp;
-          <span style={{ color: "#FF3D3D", fontWeight: "bold", fontStyle: "italic" }}>
-            {extendRepaymentData?.overdueDay
-              ? `overdue for ${extendRepaymentData?.overdueDay} days`
-              : `There are still ${dueDate?.daysDiff} days left`}
-          </span>
-          . Extending will impact your credit.
-        </TipContent>
-      </TopContent>
+      <DateComponent isOverdue={extendRepaymentData?.overdueDay} data={dueDate} />
 
       <RepayContent>
         <AppInfoContent>

@@ -14,7 +14,7 @@ import {
 } from "@/api";
 import { Toast } from "@/components";
 import { QuestionData } from "@/modules/QuestionData";
-import type { Answer } from "@/modules/QuestionData";
+import type { AnswerTypes } from "@/modules/QuestionData";
 import { UploadData } from "@/modules/UploadData";
 import { compressImage, setPageTitle } from "@/utils";
 
@@ -24,7 +24,7 @@ interface QuestionTypeModalProps {
   visible: boolean;
   data: QuestionData["answerList"] | null;
   value: number;
-  onSelect: (item: Answer, index: number) => void;
+  onSelect: (item: AnswerTypes, index: number) => void;
   onClose: () => void;
   onDone: () => void;
 }
@@ -33,7 +33,7 @@ interface QuestionModalProps {
   visible: boolean;
   data: QuestionData["answerList"] | null;
   value: number;
-  onSelect: (item: Answer, index: number) => void;
+  onSelect: (item: AnswerTypes, index: number) => void;
   onClose: () => void;
   onDone: () => void;
 }
@@ -224,7 +224,7 @@ const ComplaintForm: FC = () => {
     setQuestionTypeModalVisible(true);
   };
 
-  const handleQuestionTypeSelect = (item: Answer, index: number) => {
+  const handleQuestionTypeSelect = (item: AnswerTypes, index: number) => {
     console.log("handleQuestionTypeSelect", item);
     setQuestionTypeModalIndex(index);
   };
@@ -249,7 +249,7 @@ const ComplaintForm: FC = () => {
     setQuestionModalVisible(true);
   };
 
-  const handleQuestionSelect = (item: Answer, index: number) => {
+  const handleQuestionSelect = (item: AnswerTypes, index: number) => {
     console.log("handleQuestionSelect", item);
     setQuestionModalIndex(index);
     setQuestionSelectedId(item.id);

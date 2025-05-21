@@ -1,7 +1,7 @@
 export interface resType<T> {
-    "griefs": T;
-    "oddities": string;
-    "mortification": string | number;
+    ["griefs"]: T;
+    ["oddities"]: string;
+    ["mortification"]: string | number;
 }
 
 export class ApiResponse<T> {

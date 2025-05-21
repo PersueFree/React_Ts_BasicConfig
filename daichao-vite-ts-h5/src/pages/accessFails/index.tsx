@@ -12,9 +12,7 @@ import { Container, Toast } from "@/components";
 import { AccessFailsData } from "@/modules/AccessFailsData";
 import { setPageTitle } from "@/utils";
 
-import { RecProduct } from "./component/RecProduct";
-import { RepaymentProduct } from "./component/RepaymentProduct";
-import { TopBanner } from "./component/TopBanner";
+import { RecProduct, RepaymentProduct, TopBanner } from "./component";
 
 const TopContent = styled.div`
   width: 100%;

@@ -1,9 +1,15 @@
 type CallbackFunction = (data?: string) => void;
 type ResponseCallbacks = Record<string, CallbackFunction>;
 
+interface orderTypes {
+  productId?: string;
+  orderNo?: string | number;
+  imageUrl?: string;
+}
+
 interface WebViewMessage {
   action: string;
-  data?: string;
+  data?: string | orderTypes;
   callbackId: string | null;
 }
 
@@ -45,7 +51,7 @@ export default class WebViewBridge {
     }
   }
 
-  send(action: string, data?: string, callback?: CallbackFunction): void {
+  send(action: string, data?: orderTypes | string, callback?: CallbackFunction): void {
     if (typeof window === "undefined") {
       console.error("WebViewBridge: Window object not available");
       return;

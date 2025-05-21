@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
 
-import type { ComplaintItemFun } from "@/modules/ComplaintListData";
+import type { ComplaintItemFunTypes } from "@/modules/ComplaintListData";
 import { RouterConfig } from "@/router/routerConfig";
 
 const Container = styled.div`
@@ -80,8 +80,8 @@ const StatusText = styled.span<{ color?: string | null }>`
   text-overflow: ellipsis;
 `;
 
-const ComplaintItem: FC<{ item: ComplaintItemFun }> = ({ item }) => {
-  const handleClick = (item: ComplaintItemFun) => {
+const ComplaintItem: FC<{ item: ComplaintItemFunTypes }> = ({ item }) => {
+  const handleClick = (item: ComplaintItemFunTypes) => {
     console.log("ComplaintItem", item);
     window.location.href = `/#${RouterConfig.COMPLAINT_DETAILS}?problemId=${item.id}`;
   };

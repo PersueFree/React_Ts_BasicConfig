@@ -27,26 +27,26 @@ interface RepaymentOfDelayData {
   ["engagement"]: string;
 }
 
-interface HeaderData {
+interface HeaderDataTypes {
   displayTotalText?: string;
   displayTotalAmount?: string;
   note?: string;
 }
 
-interface RepaymentDetailItem {
+interface RepaymentDetailItemTypes {
   text?: string;
   value?: string;
 }
 
-interface RepaymentAmountData {
+interface RepaymentAmountDataTypes {
   text?: string;
   value?: string;
 }
 
 class ExtendedRepaymentData {
-  totalPaymentInfo?: HeaderData;
-  repaymentDetailData?: RepaymentDetailItem[];
-  repaymentAmountData?: RepaymentAmountData;
+  totalPaymentInfo?: HeaderDataTypes;
+  repaymentDetailData?: RepaymentDetailItemTypes[];
+  repaymentAmountData?: RepaymentAmountDataTypes;
   repaymentAmount?: string;
   overdueDay?: number;
   repayDate?: string;
@@ -67,9 +67,9 @@ class ExtendedRepaymentData {
     orderNo,
     expiryTime,
   }: {
-    totalPaymentInfo?: HeaderData;
-    repaymentDetailData?: RepaymentDetailItem[];
-    repaymentAmountData?: RepaymentAmountData;
+    totalPaymentInfo?: HeaderDataTypes;
+    repaymentDetailData?: RepaymentDetailItemTypes[];
+    repaymentAmountData?: RepaymentAmountDataTypes;
     repaymentAmount?: string;
     overdueDay?: number;
     repayDate?: string;
@@ -109,7 +109,7 @@ class ExtendedRepaymentData {
     });
   }
 
-  static processHeaderData(item?: RepaymentOfDelayData["grouped"]): HeaderData | undefined {
+  static processHeaderData(item?: RepaymentOfDelayData["grouped"]): HeaderDataTypes | undefined {
     return (
       item && {
         displayTotalText: item["deserts"],
@@ -121,7 +121,7 @@ class ExtendedRepaymentData {
 
   static processRepaymentDetailData(
     data?: RepaymentOfDelayData["principally"],
-  ): RepaymentDetailItem[] | undefined {
+  ): RepaymentDetailItemTypes[] | undefined {
     return (
       data &&
       data.map((item) => ({
@@ -133,7 +133,7 @@ class ExtendedRepaymentData {
 
   static processRepaymentAmountData(
     data?: RepaymentOfDelayData["laughingly"],
-  ): RepaymentAmountData | undefined {
+  ): RepaymentAmountDataTypes | undefined {
     return (
       data && {
         text: data["deserts"],
@@ -143,3 +143,4 @@ class ExtendedRepaymentData {
   }
 }
 export { ExtendedRepaymentData };
+export type { HeaderDataTypes, RepaymentDetailItemTypes, RepaymentAmountDataTypes };

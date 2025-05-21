@@ -19,7 +19,7 @@ interface QuestionDataProps {
   ["amused"]: QuestionItem[]; // 问题列表
 }
 
-interface Question {
+interface QuestionTypes {
   id?: string | number;
   title?: string;
   title_local?: string;
@@ -30,7 +30,7 @@ interface Question {
   level5?: string | number;
 }
 
-interface Answer {
+interface AnswerTypes {
   id?: string | number;
   title?: string;
   title_local?: string;
@@ -41,15 +41,15 @@ interface Answer {
 }
 
 class QuestionData {
-  question?: Question;
-  answerList?: Answer[];
+  question?: QuestionTypes;
+  answerList?: AnswerTypes[];
 
   constructor({
     question,
     answerList,
   }: {
-    question?: Question;
-    answerList?: Answer[];
+    question?: QuestionTypes;
+    answerList?: AnswerTypes[];
   } = {}) {
     this.question = question;
     this.answerList = answerList;
@@ -64,7 +64,7 @@ class QuestionData {
     });
   }
 
-  static processQuestion(item?: QuestionItem): Question | undefined {
+  static processQuestion(item?: QuestionItem): QuestionTypes | undefined {
     if (!item) return undefined;
 
     return {
@@ -79,7 +79,7 @@ class QuestionData {
     };
   }
 
-  static processAnswerList(data?: QuestionItem[]): Answer[] | undefined {
+  static processAnswerList(data?: QuestionItem[]): AnswerTypes[] | undefined {
     return data?.map((item) => ({
       id: item["pitiable"],
       title: item["title_local"],
@@ -91,4 +91,4 @@ class QuestionData {
 }
 
 export { QuestionData };
-export type { Answer, Question };
+export type { AnswerTypes, QuestionTypes };

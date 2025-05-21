@@ -1,26 +1,3 @@
-interface RepaymentProduct {
-  id: number;
-  productLogo: string;
-  productName: string;
-  amount: string;
-  repaymentDate: string;
-  url: string;
-}
-
-interface RecProduct {
-  id: number;
-  buttonStatus: number;
-  buttonText: string;
-  productLogo: string;
-  productName: string;
-  amountRange: string;
-  amountRangeDes: string;
-  termInfo: string;
-  loanTermText: string;
-  loanRate: string;
-  loanRateDes: string;
-}
-
 interface RawRepaymentProduct {
   ["pitiable"]: number;
   ["perforce"]?: string;
@@ -49,19 +26,42 @@ interface RawAccessFailsData {
   ["recovery"]?: RawRecProduct[];
 }
 
+interface RepaymentProductTypes {
+  id: number;
+  productLogo: string;
+  productName: string;
+  amount: string;
+  repaymentDate: string;
+  url: string;
+}
+
+interface RecProductTypes {
+  id: number;
+  buttonStatus: number;
+  buttonText: string;
+  productLogo: string;
+  productName: string;
+  amountRange: string;
+  amountRangeDes: string;
+  termInfo: string;
+  loanTermText: string;
+  loanRate: string;
+  loanRateDes: string;
+}
+
 class AccessFailsData {
   titleMessage: string;
   errMessage: string;
   noticeMessage: string;
-  recProducts: RecProduct[];
-  repaymentProducts: RepaymentProduct[];
+  recProducts: RecProductTypes[];
+  repaymentProducts: RepaymentProductTypes[];
 
   constructor(params: {
     titleMessage: string;
     errMessage: string;
     noticeMessage: string;
-    repaymentProducts: RepaymentProduct[];
-    recProducts: RecProduct[];
+    repaymentProducts: RepaymentProductTypes[];
+    recProducts: RecProductTypes[];
   }) {
     this.titleMessage = params.titleMessage;
     this.errMessage = params.errMessage;
@@ -82,7 +82,7 @@ class AccessFailsData {
     });
   }
 
-  private static processRepaymentProducts(data?: RawRepaymentProduct[]): RepaymentProduct[] {
+  private static processRepaymentProducts(data?: RawRepaymentProduct[]): RepaymentProductTypes[] {
     if (!data) return [];
 
     return data.map((item) => ({
@@ -95,7 +95,7 @@ class AccessFailsData {
     }));
   }
 
-  private static processRecProducts(data?: RawRecProduct[]): RecProduct[] {
+  private static processRecProducts(data?: RawRecProduct[]): RecProductTypes[] {
     if (!data) return [];
 
     return data.map((item) => ({
@@ -115,4 +115,4 @@ class AccessFailsData {
 }
 
 export { AccessFailsData };
-export type { RepaymentProduct, RecProduct, RawAccessFailsData };
+export type { RepaymentProductTypes, RecProductTypes };

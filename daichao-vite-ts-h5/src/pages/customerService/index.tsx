@@ -8,8 +8,7 @@ import { Container } from "@/components";
 import { RouterConfig } from "@/router/routerConfig";
 import { setPageTitle } from "@/utils";
 
-import { ServiceCard } from "./components/ServiceCard";
-import { ServiceItem } from "./components/ServiceItem";
+import { ServiceCard, ServiceItem } from "./components";
 
 const TopLine = styled.div`
   margin-top: -4.2rem;

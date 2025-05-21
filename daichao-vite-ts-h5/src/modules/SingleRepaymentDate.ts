@@ -29,7 +29,7 @@ interface RepaymentData {
   ["fellows"]: string;
 }
 
-interface ProcessedRepaymentSchedule {
+interface ProcessedRepaymentScheduleTypes {
   periodNo: number;
   selected: number;
   canClick: number;
@@ -45,13 +45,13 @@ interface ProcessedRepaymentSchedule {
   repayInterest: string;
 }
 
-interface HeaderData {
+interface HeaderDataTypes {
   displayTotalPayment: string;
   totalPaymentText: string;
 }
 
 class SingleRepaymentDate {
-  headerData: HeaderData;
+  headerData: HeaderDataTypes;
   productName: string;
   productLogo: string;
   orderNo: string;
@@ -59,7 +59,7 @@ class SingleRepaymentDate {
   overdueDay: number;
   displayTotalPayment: string;
   totalPaymentText: string;
-  repaymentSchedules: ProcessedRepaymentSchedule[];
+  repaymentSchedules: ProcessedRepaymentScheduleTypes[];
   note: string;
 
   constructor({
@@ -74,7 +74,7 @@ class SingleRepaymentDate {
     repaymentSchedules,
     note,
   }: {
-    headerData: HeaderData;
+    headerData: HeaderDataTypes;
     productName: string;
     productLogo: string;
     orderNo: string;
@@ -82,7 +82,7 @@ class SingleRepaymentDate {
     overdueDay: number;
     displayTotalPayment: string;
     totalPaymentText: string;
-    repaymentSchedules: ProcessedRepaymentSchedule[];
+    repaymentSchedules: ProcessedRepaymentScheduleTypes[];
     note: string;
   }) {
     this.headerData = headerData;
@@ -116,7 +116,7 @@ class SingleRepaymentDate {
     });
   }
 
-  private static processHeaderData(data: RepaymentData): HeaderData {
+  private static processHeaderData(data: RepaymentData): HeaderDataTypes {
     return {
       displayTotalPayment: data["cheating"],
       totalPaymentText: data["overthrowing"],
@@ -125,7 +125,7 @@ class SingleRepaymentDate {
 
   private static processRepaymentSchedules(
     data: RepaymentScheduleItem[] | undefined,
-  ): ProcessedRepaymentSchedule[] {
+  ): ProcessedRepaymentScheduleTypes[] {
     return (
       data?.map((item) => ({
         periodNo: item["reel"],
@@ -147,3 +147,4 @@ class SingleRepaymentDate {
 }
 
 export { SingleRepaymentDate };
+export type { ProcessedRepaymentScheduleTypes, HeaderDataTypes };

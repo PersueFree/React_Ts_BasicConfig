@@ -15,7 +15,7 @@ interface PublicParamsType {
   ["proprietor"]?: string;
 }
 
-export function uploadRiskLoan(productId, orderNo) {
+export function uploadRiskLoan(productId: string, orderNo: string | number) {
   try {
     const params = getQueryParams();
     const _productId = productId || params["lsefa"];
@@ -24,7 +24,7 @@ export function uploadRiskLoan(productId, orderNo) {
     console.error(e);
   }
 }
-export function openGooglePlay(url) {
+export function openGooglePlay(url: string) {
   try {
     nativeInteraction.openGooglePlay(url);
   } catch (e) {
@@ -32,7 +32,7 @@ export function openGooglePlay(url) {
   }
 }
 
-export function openUrl(url) {
+export function openUrl(url: string) {
   try {
     nativeInteraction.openUrl(url);
   } catch (e) {
@@ -53,7 +53,7 @@ export function jumpToHome() {
     console.error(e);
   }
 }
-export function callPhoneMethod(phone) {
+export function callPhoneMethod(phone: string) {
   try {
     nativeInteraction.callPhoneMethod(phone);
   } catch (e) {
@@ -68,14 +68,14 @@ export function toGrade() {
   }
 }
 
-export function retryOrderDialog(orderNo) {
+export function retryOrderDialog(orderNo: string | number) {
   try {
     nativeInteraction.retryOrderDialog(orderNo);
   } catch (e) {
     console.error(e);
   }
 }
-export function changeAccount(orderNo, productId?: string) {
+export function changeAccount(orderNo: number | string, productId?: string) {
   try {
     const params = getQueryParams();
     const _productId = productId || params["lsefa"];
@@ -85,7 +85,7 @@ export function changeAccount(orderNo, productId?: string) {
   }
 }
 
-export function saveQrcode(qrcode) {
+export function saveQrcode(qrcode: string) {
   try {
     nativeInteraction.saveQrcode(qrcode);
   } catch (e) {
@@ -102,26 +102,26 @@ export const getPublicParams = (url: string): Promise<PublicParamsType> => {
     }
   });
 };
-export function encryptData(data) {
+export function encryptData(_data: string) {
   return new Promise((resolve, reject) => {
     try {
-      nativeInteraction.encryptData(data, (_data) => resolve(_data));
+      nativeInteraction.encryptData(_data, (data?: string) => resolve(data));
     } catch (e) {
       console.log(e);
       reject(e);
     }
   });
 }
-export function decryptData(data: string): Promise<string> {
-  return new Promise((resolve, reject) => {
+export const decryptData = <T = string>(_data: string): Promise<T> => {
+  return new Promise<T>((resolve, reject) => {
     try {
-      nativeInteraction.decryptData(data, (_data: string) => resolve(_data));
+      nativeInteraction.decryptData(_data, (data?: string) => resolve(data));
     } catch (e) {
       console.log(e);
       reject(e);
     }
   });
-}
+};
 
 export default {
   uploadRiskLoan,
@@ -138,3 +138,5 @@ export default {
   encryptData,
   decryptData,
 };
+
+export type { PublicParamsType };

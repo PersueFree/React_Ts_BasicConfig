@@ -1,4 +1,4 @@
-interface FeedbackItem {
+interface FeedbackItemTypes {
   ["hates"]: string; // 用户反馈文字描述
   ["defer"]: string[]; // 用户反馈图片
   ["odious"]: string; // 客服反馈文字描述
@@ -17,16 +17,16 @@ interface QuestionDetailsDataType {
   ["pens"]: 0 | 1; // 补充信息是否过期
   ["odious"]: string; // 处理详情
   ["unison"]: string[]; // 处理图片
-  ["unconcern"]: FeedbackItem[]; // 补充反馈列表
+  ["unconcern"]: FeedbackItemTypes[]; // 补充反馈列表
 }
 
-interface FeedbackItem {
+interface FeedbackItemTypes {
   id?: string;
   content?: string;
   time?: string;
 }
 
-interface QuestionDetailsDataProps {
+interface QuestionDetailsDataTypes {
   status?: string | number;
   type?: string | number;
   sonType?: string | number;
@@ -38,7 +38,7 @@ interface QuestionDetailsDataProps {
   appraiseScore?: number;
   disposeDetail?: string;
   disposeImages?: string[];
-  feedbackList?: FeedbackItem[];
+  feedbackList?: FeedbackItemTypes[];
 }
 
 class QuestionDetailsData {
@@ -53,7 +53,7 @@ class QuestionDetailsData {
   appraiseScore?: number;
   disposeDetail?: string;
   disposeImages?: string[];
-  feedbackList?: FeedbackItem[];
+  feedbackList?: FeedbackItemTypes[];
 
   constructor({
     status,
@@ -68,7 +68,7 @@ class QuestionDetailsData {
     disposeDetail,
     disposeImages,
     feedbackList,
-  }: QuestionDetailsDataProps = {}) {
+  }: QuestionDetailsDataTypes = {}) {
     this.status = status;
     this.type = type;
     this.sonType = sonType;
@@ -104,3 +104,4 @@ class QuestionDetailsData {
 }
 
 export { QuestionDetailsData };
+export type { FeedbackItemTypes, QuestionDetailsDataTypes };

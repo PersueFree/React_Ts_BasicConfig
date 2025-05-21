@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
 
-import type { RepaymentProduct } from "@/modules/AccessFailsData";
+import type { RepaymentProductTypes } from "@/modules/AccessFailsData";
 
 import { RepaymentItem } from "./RepaymentItem";
 
@@ -24,7 +24,7 @@ const ProductList = styled.div`
 `;
 
 interface Props {
-  list: RepaymentProduct[];
+  list: RepaymentProductTypes[];
 }
 
 const RepaymentProduct: FC<Props> = ({ list }) => {

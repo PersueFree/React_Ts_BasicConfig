@@ -1,19 +1,3 @@
-interface ComplaintItemFun {
-  id?: number | string;
-  time?: string;
-  status?: string | number;
-  statusDes?: string;
-  type?: string | number;
-  content?: string;
-  shouldReFeedback?: 0 | 1;
-}
-
-interface TabData {
-  title?: string;
-  id?: number;
-  list?: ComplaintItemFun[] | null;
-}
-
 interface ComplaintItem {
   ["pitiable"]: string | number; // Complaint ID
   ["exceeded"]: string; // Timestamp
@@ -34,10 +18,26 @@ interface ComplaintData {
   ["rapidly"]: ComplaintTab[]; // Array of complaint tabs
 }
 
-class ComplaintListData {
-  tabsData: TabData[] | null;
+interface ComplaintItemFunTypes {
+  id?: number | string;
+  time?: string;
+  status?: string | number;
+  statusDes?: string;
+  type?: string | number;
+  content?: string;
+  shouldReFeedback?: 0 | 1;
+}
 
-  constructor({ tabsData }: { tabsData?: TabData[] | null }) {
+interface TabDataTypes {
+  title?: string;
+  id?: number;
+  list?: ComplaintItemFunTypes[] | null;
+}
+
+class ComplaintListData {
+  tabsData: TabDataTypes[] | null;
+
+  constructor({ tabsData }: { tabsData?: TabDataTypes[] | null }) {
     this.tabsData = tabsData || null;
   }
 
@@ -49,7 +49,7 @@ class ComplaintListData {
     });
   }
 
-  static processTabsData(data?: ComplaintTab[]): TabData[] | null {
+  static processTabsData(data?: ComplaintTab[]): TabDataTypes[] | null {
     if (!data) return null;
 
     return data.map((item) => ({
@@ -69,7 +69,7 @@ class ComplaintListData {
       hates?: string;
       writes?: 0 | 1;
     }>,
-  ): ComplaintItemFun[] | null {
+  ): ComplaintItemFunTypes[] | null {
     if (!data) return null;
 
     return data.map((item) => ({
@@ -85,4 +85,4 @@ class ComplaintListData {
 }
 
 export { ComplaintListData };
-export type { ComplaintItemFun, TabData };
+export type { ComplaintItemFunTypes, TabDataTypes };

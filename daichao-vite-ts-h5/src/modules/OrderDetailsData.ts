@@ -1,122 +1,3 @@
-// 定义所有嵌套对象的类型
-interface OrderDetailItem {
-  text: string;
-  value: string;
-}
-
-interface RecProduct {
-  id: number;
-  productName?: string;
-  amount?: string;
-  productDesc?: string;
-  productLogo?: string;
-  buttonStatus?: number;
-  buttonText?: string;
-  buttoncolor?: string;
-  amountRangeDes?: string;
-  interestRateText?: string;
-  term?: string;
-  url?: string;
-  loanTerms?: string;
-  interestRate?: string;
-  loanTermsText?: string;
-}
-
-interface RecProductsItem {
-  ["pitiable"]: number;
-  ["grace"]?: string;
-  ["liveliness"]?: string;
-  ["incessantly"]?: string;
-  ["perforce"]?: string;
-  ["derives"]?: number;
-  ["timed"]?: string;
-  ["nephew"]?: string;
-  ["disrespect"]?: string;
-  ["rebuke"]?: string;
-  ["arrogant"]?: string;
-  ["vivacity"]?: string;
-  ["soliciting"]?: string;
-  ["archbishop"]?: string;
-  ["intimately"]?: string;
-  ["sincere"]?: string;
-}
-
-interface EasterEggProduct {
-  productId: number;
-  productName?: string;
-  productLogo?: string;
-  amount?: string;
-  loanTerms?: string;
-  loanTermsText?: string;
-  interestRate?: string;
-  interestRateText?: string;
-  buttonStatus?: number;
-  buttonText?: string;
-}
-
-interface EasterEggInfoItem {
-  ["distressing"]: number;
-  ["professions"]?: string;
-  ["welcomed"]?: string;
-  ["contradict"]?: string;
-  ["rambled"]?: string;
-  ["rejoicing"]?: string;
-  ["gaily"]?: string;
-  ["bye"]?: string;
-  ["picturesque"]?: number;
-  ["enumerating"]?: string;
-}
-
-interface EasterEggInfo {
-  subTitle?: string;
-  expireTime?: number;
-  distProducts: EasterEggProduct[];
-}
-
-interface LoanFailedButton {
-  buttonText?: string;
-  ifShow?: number;
-}
-
-interface LoanFailedData {
-  orderNo?: string;
-  loanStatus?: number;
-  msg?: string;
-  retryCard?: LoanFailedButton;
-  changeCard?: LoanFailedButton;
-}
-
-interface OrderStatusData {
-  isReCard: boolean;
-  orderStatus: number;
-  noticeStatusText: string;
-  noticeDesText: string;
-  sysCancel?: string;
-}
-
-interface CountdownData {
-  expireTime?: number;
-}
-
-interface OrderDetailsContent {
-  productName?: string;
-  productLogo?: string;
-  orderAmount?: string;
-  detail: OrderDetailItem[];
-}
-
-interface LoanExcitationData {
-  loanAmountAsExpect?: string;
-  nextLoanAmountAsExpect?: string;
-  nextNextLoanAmountAsExpect?: string;
-}
-
-interface ButtonsData {
-  orderStatus: number;
-  isDelay: boolean;
-  h5Url: string;
-}
-
 // 定义原始数据接口
 interface RawData {
   ["resume"]: number;
@@ -195,41 +76,160 @@ interface RawData {
   ["tea"]?: string;
 }
 
+interface RecProductsItem {
+  ["pitiable"]: number;
+  ["grace"]?: string;
+  ["liveliness"]?: string;
+  ["incessantly"]?: string;
+  ["perforce"]?: string;
+  ["derives"]?: number;
+  ["timed"]?: string;
+  ["nephew"]?: string;
+  ["disrespect"]?: string;
+  ["rebuke"]?: string;
+  ["arrogant"]?: string;
+  ["vivacity"]?: string;
+  ["soliciting"]?: string;
+  ["archbishop"]?: string;
+  ["intimately"]?: string;
+  ["sincere"]?: string;
+}
+
+interface EasterEggInfoItem {
+  ["distressing"]: number;
+  ["professions"]?: string;
+  ["welcomed"]?: string;
+  ["contradict"]?: string;
+  ["rambled"]?: string;
+  ["rejoicing"]?: string;
+  ["gaily"]?: string;
+  ["bye"]?: string;
+  ["picturesque"]?: number;
+  ["enumerating"]?: string;
+}
+
+// 定义所有嵌套对象的类型
+interface OrderDetailItemTypes {
+  text: string;
+  value: string;
+}
+
+interface RecProductTypes {
+  id: number;
+  productName?: string;
+  amount?: string;
+  productDesc?: string;
+  productLogo?: string;
+  buttonStatus?: number;
+  buttonText?: string;
+  buttoncolor?: string;
+  amountRangeDes?: string;
+  interestRateText?: string;
+  term?: string;
+  url?: string;
+  loanTerms?: string;
+  interestRate?: string;
+  loanTermsText?: string;
+}
+
+interface EasterEggProductTypes {
+  productId: number;
+  productName?: string;
+  productLogo?: string;
+  amount?: string;
+  loanTerms?: string;
+  loanTermsText?: string;
+  interestRate?: string;
+  interestRateText?: string;
+  buttonStatus?: number;
+  buttonText?: string;
+}
+
+interface EasterEggInfoTypes {
+  subTitle?: string;
+  expireTime?: number;
+  distProducts: EasterEggProductTypes[];
+}
+
+interface LoanFailedButtonTypes {
+  buttonText?: string;
+  ifShow?: number;
+}
+
+interface LoanFailedDataTypes {
+  orderNo?: string;
+  loanStatus?: number;
+  msg?: string;
+  retryCard?: LoanFailedButtonTypes;
+  changeCard?: LoanFailedButtonTypes;
+}
+
+interface OrderStatusDataTypes {
+  isReCard: boolean;
+  orderStatus: number;
+  noticeStatusText: string;
+  noticeDesText: string;
+  sysCancel?: string;
+}
+
+interface CountdownDataTypes {
+  expireTime?: number;
+}
+
+interface OrderDetailsContentTypes {
+  productName?: string;
+  productLogo?: string;
+  orderAmount?: string;
+  detail: OrderDetailItemTypes[];
+}
+
+interface LoanExcitationDataTypes {
+  loanAmountAsExpect?: string;
+  nextLoanAmountAsExpect?: string;
+  nextNextLoanAmountAsExpect?: string;
+}
+
+interface ButtonsDataTypes {
+  orderStatus: number;
+  isDelay: boolean;
+  h5Url: string;
+}
+
 // 主类构造参数类型
-interface OrderDetailsParams {
+interface OrderDetailsParamsTypes {
   isReCard: boolean;
   isShowLoanMarket: boolean;
-  orderStatusData: OrderStatusData;
-  countdownData: CountdownData | null;
+  orderStatusData: OrderStatusDataTypes;
+  countdownData: CountdownDataTypes | null;
   scoreModalVisible: boolean;
-  orderDetailsData: OrderDetailsContent | Record<string, never>;
-  loanFailed?: LoanFailedData;
-  recProducts: RecProduct[];
+  orderDetailsData: OrderDetailsContentTypes | Record<string, never>;
+  loanFailed?: LoanFailedDataTypes;
+  recProducts: RecProductTypes[];
   shouldDisplayEasterEgg: boolean;
-  easterEggInfo: EasterEggInfo;
+  easterEggInfo: EasterEggInfoTypes;
   shouldDisplayLoanExcitation: boolean;
-  loanExcitationData: LoanExcitationData;
-  buttonsData: ButtonsData;
+  loanExcitationData: LoanExcitationDataTypes;
+  buttonsData: ButtonsDataTypes;
   orderNo: string;
 }
 
-export class OrderDetailsData {
+class OrderDetailsData {
   isReCard: boolean;
   isShowLoanMarket: boolean;
-  orderStatusData: OrderStatusData;
-  countdownData: CountdownData | null;
+  orderStatusData: OrderStatusDataTypes;
+  countdownData: CountdownDataTypes | null;
   scoreModalVisible: boolean;
-  orderDetailsData: OrderDetailsContent | Record<string, never>;
-  loanFailed?: LoanFailedData;
-  recProducts: RecProduct[];
+  orderDetailsData: OrderDetailsContentTypes | Record<string, never>;
+  loanFailed?: LoanFailedDataTypes;
+  recProducts: RecProductTypes[];
   shouldDisplayEasterEgg: boolean;
-  easterEggInfo: EasterEggInfo;
+  easterEggInfo: EasterEggInfoTypes;
   shouldDisplayLoanExcitation: boolean;
-  loanExcitationData: LoanExcitationData;
-  buttonsData: ButtonsData;
+  loanExcitationData: LoanExcitationDataTypes;
+  buttonsData: ButtonsDataTypes;
   orderNo: string;
 
-  constructor(params: OrderDetailsParams) {
+  constructor(params: OrderDetailsParamsTypes) {
     this.isReCard = params.isReCard;
     this.isShowLoanMarket = params.isShowLoanMarket;
     this.orderStatusData = params.orderStatusData;
@@ -283,7 +283,7 @@ export class OrderDetailsData {
     return data["sofas"] == 1;
   }
 
-  private static processOrderStatusData(data: RawData): OrderStatusData {
+  private static processOrderStatusData(data: RawData): OrderStatusDataTypes {
     const loanFailed = data?.["salutation"];
     const isReCard = loanFailed ? loanFailed["advanced"] == 1 : false;
 
@@ -296,7 +296,7 @@ export class OrderDetailsData {
     };
   }
 
-  private static processCountdownData(data: RawData): CountdownData | null {
+  private static processCountdownData(data: RawData): CountdownDataTypes | null {
     const apiData = data["relate"];
     const shouldDisplayEasterEgg = data["anecdote"];
     const orderStatus = data["resume"];
@@ -308,7 +308,7 @@ export class OrderDetailsData {
 
   private static processOrderDetailsData(
     data: RawData,
-  ): OrderDetailsContent | Record<string, never> {
+  ): OrderDetailsContentTypes | Record<string, never> {
     // if ([110, 999].includes(data["resume"])) {
     //   return {};
     // }
@@ -321,7 +321,7 @@ export class OrderDetailsData {
     };
   }
 
-  private static processOrderDetail(data: RawData["bracelets"]): OrderDetailItem[] {
+  private static processOrderDetail(data: RawData["bracelets"]): OrderDetailItemTypes[] {
     const detail = data?.["principally"];
     return (
       detail?.map((item: { ["deserts"]: string; ["impartial"]: string }) => ({
@@ -343,7 +343,7 @@ export class OrderDetailsData {
     return orderStatus == 21 || (orderStatus == 151 && !isCancelled) || orderStatus == 174;
   }
 
-  private static processLoanExcitationData(data: RawData): LoanExcitationData {
+  private static processLoanExcitationData(data: RawData): LoanExcitationDataTypes {
     return {
       loanAmountAsExpect: data["soup"],
       nextLoanAmountAsExpect: data["nicholls"],
@@ -351,11 +351,11 @@ export class OrderDetailsData {
     };
   }
 
-  private static processRecProducts(data: RawData["yawned"]): RecProduct[] {
+  private static processRecProducts(data: RawData["yawned"]): RecProductTypes[] {
     const safeData = data ?? [];
     return (
       safeData?.map(
-        (item: RecProductsItem): RecProduct => ({
+        (item: RecProductsItem): RecProductTypes => ({
           id: item["pitiable"],
           productName: item["grace"],
           amount: item["liveliness"],
@@ -376,7 +376,7 @@ export class OrderDetailsData {
     );
   }
 
-  private static processEasterEggInfo(data?: RawData["relate"]): EasterEggInfo {
+  private static processEasterEggInfo(data?: RawData["relate"]): EasterEggInfoTypes {
     const safeData = data ?? {
       ["accuracy"]: "",
       ["entertainment"]: 0,
@@ -386,7 +386,7 @@ export class OrderDetailsData {
       subTitle: safeData["accuracy"],
       expireTime: safeData["entertainment"],
       distProducts: (safeData["powers"] || []).map(
-        (item: EasterEggInfoItem): EasterEggProduct => ({
+        (item: EasterEggInfoItem): EasterEggProductTypes => ({
           productId: item["distressing"],
           productName: item["professions"],
           productLogo: item["welcomed"],
@@ -405,13 +405,13 @@ export class OrderDetailsData {
   private static processLoanFailed(
     data: RawData["salutation"],
     orderNo?: string,
-  ): LoanFailedData | undefined {
+  ): LoanFailedDataTypes | undefined {
     if (!data || Object.keys(data).length === 0) return undefined;
 
     const parseItem = (item: {
       ["enumerating"]?: string;
       ["crowded"]?: number;
-    }): LoanFailedButton => ({
+    }): LoanFailedButtonTypes => ({
       buttonText: item["enumerating"],
       ifShow: item["crowded"],
     });
@@ -425,11 +425,27 @@ export class OrderDetailsData {
     };
   }
 
-  private static processButtonData(data: RawData): ButtonsData {
+  private static processButtonData(data: RawData): ButtonsDataTypes {
     return {
       orderStatus: data["resume"],
       isDelay: data["quest"] == 1,
       h5Url: data["petition"],
     };
   }
+}
+
+export { OrderDetailsData }
+export type {
+  OrderDetailItemTypes,
+  RecProductTypes,
+  EasterEggProductTypes,
+  EasterEggInfoTypes,
+  LoanFailedButtonTypes,
+  LoanFailedDataTypes,
+  OrderStatusDataTypes,
+  CountdownDataTypes,
+  OrderDetailsContentTypes,
+  LoanExcitationDataTypes,
+  ButtonsDataTypes,
+  OrderDetailsParamsTypes,
 }

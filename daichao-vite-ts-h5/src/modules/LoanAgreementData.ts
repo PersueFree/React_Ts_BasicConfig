@@ -1,9 +1,3 @@
-interface RepayPlan {
-  periodNo?: string | number;
-  repayDay?: string;
-  repayMoney?: string | number;
-}
-
 interface LoanAgreementDataProps {
   ["conscious"]: string;
   ["civilities"]: string;
@@ -29,6 +23,12 @@ interface LoanAgreementDataProps {
   }>;
 }
 
+interface RepayPlanTypes {
+  periodNo?: string | number;
+  repayDay?: string;
+  repayMoney?: string | number;
+}
+
 class LoanAgreementData {
   loanTime?: string;
   companyName?: string;
@@ -46,7 +46,7 @@ class LoanAgreementData {
   serviceFee?: string | number;
   dayOverdueRate?: string | number;
   apr?: string | number;
-  repayPlans?: RepayPlan[];
+  repayPlans?: RepayPlanTypes[];
 
   constructor({
     loanTime,
@@ -83,7 +83,7 @@ class LoanAgreementData {
     serviceFee?: string | number;
     dayOverdueRate?: string | number;
     apr?: string | number;
-    repayPlans?: RepayPlan[];
+    repayPlans?: RepayPlanTypes[];
   }) {
     this.loanTime = loanTime;
     this.companyName = companyName;
@@ -132,3 +132,4 @@ class LoanAgreementData {
 }
 
 export { LoanAgreementData };
+export type { RepayPlanTypes };

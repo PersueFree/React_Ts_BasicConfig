@@ -8,8 +8,8 @@ import { AppConfig } from "@/AppConfig";
 import { fetchCustomerServiceParams, fetchQuestionList } from "@/api";
 import { Toast } from "@/components";
 import { CustomerServiceParamsData } from "@/modules/CustomerServiceParamsData";
-import type { OrderItem } from "@/modules/CustomerServiceParamsData";
-import type { Answer } from "@/modules/QuestionData";
+import type { OrderItemTypes } from "@/modules/CustomerServiceParamsData";
+import type { AnswerTypes } from "@/modules/QuestionData";
 import { QuestionData } from "@/modules/QuestionData";
 import { RouterConfig } from "@/router/routerConfig";
 import { setPageTitle } from "@/utils";
@@ -17,15 +17,15 @@ import { setPageTitle } from "@/utils";
 import "./ComplaintOrders.less";
 
 interface OrderDetailsProps {
-  order: OrderItem;
+  order: OrderItemTypes;
 }
 
 interface OrderListProps {
   current: CustomerServiceParamsData["orderDetail"] | null;
-  list: OrderItem[] | null;
+  list: OrderItemTypes[] | null;
   visible: boolean;
   onClose: () => void;
-  onSelect: (item: OrderItem, index: number) => void;
+  onSelect: (item: OrderItemTypes, index: number) => void;
 }
 
 const ComplaintOrders: FC = () => {
@@ -33,7 +33,7 @@ const ComplaintOrders: FC = () => {
   const [orderListVisible, setOrderListVisible] = useState<boolean>(false);
   const [problemType, setProblemType] = useState<QuestionData["answerList"] | null>();
   const [orderDetail, setOrderDetail] = useState<CustomerServiceParamsData["orderDetail"] | null>();
-  const [orderList, setOrderList] = useState<OrderItem[] | null>();
+  const [orderList, setOrderList] = useState<OrderItemTypes[] | null>();
 
   useEffect(() => {
     setPageTitle("Customer Service");
@@ -71,7 +71,7 @@ const ComplaintOrders: FC = () => {
   };
 
   // 选择投诉类型
-  const handleSelectType = (item: Answer, index: number) => {
+  const handleSelectType = (item: AnswerTypes, index: number) => {
     const orderNo = orderDetail?.orderNo ?? "";
     localStorage.setItem("orderNo", orderNo);
     localStorage.setItem("selectedIndex", String(index));
@@ -79,7 +79,7 @@ const ComplaintOrders: FC = () => {
   };
 
   // 选择订单
-  const handleOrderSelect = (item: OrderItem, index: number) => {
+  const handleOrderSelect = (item: OrderItemTypes, index: number) => {
     console.log("item", item, index);
     setOrderDetail(item);
   };
@@ -157,7 +157,7 @@ const OrderDetails: FC<OrderDetailsProps> = ({ order }) => {
   );
 };
 
-const QuestionTypeList: FC<{ list: Answer[]; onSelect: (item: Answer, index: number) => void }> = ({
+const QuestionTypeList: FC<{ list: AnswerTypes[]; onSelect: (item: AnswerTypes, index: number) => void }> = ({
   list,
   onSelect,
 }) => {
@@ -165,7 +165,7 @@ const QuestionTypeList: FC<{ list: Answer[]; onSelect: (item: Answer, index: num
     <div className='complainTypeList'>
       <p>Select the type of issue</p>
       <ul>
-        {list.map((item: Answer, index: number) => {
+        {list.map((item: AnswerTypes, index: number) => {
           return (
             <li key={index} onClick={() => onSelect(item, index)}>
               <img

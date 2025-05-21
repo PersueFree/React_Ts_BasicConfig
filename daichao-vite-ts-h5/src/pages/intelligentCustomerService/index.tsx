@@ -10,13 +10,13 @@ import { fetchQuestionList, submitCustomerServiceFeedback } from "@/api";
 // import styled from "styled-components";
 import { ScoreModal, ScoreResultModal, Toast } from "@/components";
 import { QuestionData } from "@/modules/QuestionData";
-import type { Answer, Question } from "@/modules/QuestionData";
+import type { AnswerTypes, QuestionTypes } from "@/modules/QuestionData";
 import { RouterConfig } from "@/router/routerConfig";
 import { currentDate as _currentDate, setPageTitle } from "@/utils";
 
 import "./index.less";
 
-interface QuestionProps extends Question {
+interface QuestionProps extends QuestionTypes {
   currentIndex?: number;
 }
 
@@ -158,7 +158,7 @@ const IntelligentCustomerService: FC = () => {
     setScoreResModalVisible(clickIndex < 4);
   };
 
-  const handleSelectDetailType = (item: Answer, index: number) => {
+  const handleSelectDetailType = (item: AnswerTypes, index: number) => {
     console.log("handleSelectDetailType", item, index);
     if (item.action_type == 4) {
       jumpToCustomerService(item);
@@ -167,7 +167,7 @@ const IntelligentCustomerService: FC = () => {
     }
   };
 
-  const handleSelectType = (item: Answer, index: number) => {
+  const handleSelectType = (item: AnswerTypes, index: number) => {
     console.log(item);
     setCurrentIndex(index);
     fetchData(item.id);
@@ -289,7 +289,7 @@ const IntelligentCustomerService: FC = () => {
                     </p>
                   </li>
 
-                  {item?.answerList?.map((item: Answer, key) => {
+                  {item?.answerList?.map((item: AnswerTypes, key) => {
                     return (
                       <li
                         key={key}
@@ -436,14 +436,14 @@ const IntelligentCustomerService: FC = () => {
 interface QuestionTypeListProps {
   list: QuestionData["answerList"] | null;
   currentIndex: number;
-  onSelect: (item: Question, index: number) => void;
+  onSelect: (item: QuestionTypes, index: number) => void;
 }
 
 const QuestionTypeList: FC<QuestionTypeListProps> = ({ list, currentIndex, onSelect }) => {
   return (
     <div className='complainTypeList'>
       <ul>
-        {list?.map((item: Answer, index: number) => {
+        {list?.map((item: AnswerTypes, index: number) => {
           const isBold = index == currentIndex;
           return (
             <li

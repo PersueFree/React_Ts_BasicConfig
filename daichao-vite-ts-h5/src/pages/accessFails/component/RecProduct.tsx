@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { ProductAccessJump } from "@/utils/ProductAccessJump";
 
 import { ProductItem } from "@/components";
-import type { RecProduct } from "@/modules/AccessFailsData";
+import type { RecProductTypes } from "@/modules/AccessFailsData";
 
 const AccessProductContent = styled.div`
   background: linear-gradient(112deg, #f1f2ff 0%, #ffffff 100%);
@@ -42,7 +42,7 @@ const ProductList = styled.div`
 `;
 
 interface Props {
-  list: RecProduct[];
+  list: RecProductTypes[];
 }
 
 const RecProduct: FC<Props> = ({ list }) => {

@@ -9,10 +9,13 @@ import { Toast } from "@/components";
 import { ProductAccessData } from "@/modules/ProductAccessData";
 
 // 准入
-export const ProductAccessJump = async (productId: string | number | undefined, scene: number | string) => {
+export const ProductAccessJump = async (
+  productId: string | number | undefined,
+  scene: number | string,
+) => {
   Toast.showLoading("loading...");
   try {
-    const res = await fetchProductAccessData(productId, scene);
+    const res = await fetchProductAccessData({ productId: productId, scene: scene });
     Toast.clear();
 
     const data = ProductAccessData.parseJson(res.data);

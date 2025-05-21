@@ -11,7 +11,7 @@ import { Toast } from "@/components";
 import { Container } from "@/components";
 // import mock_repaymentMethods from "@/mock/mock_repaymentMethod.json";
 import { RepaymentMethodsData } from "@/modules/RepaymentMethodData";
-import type { PaymentMethodItemType } from "@/modules/RepaymentMethodData";
+import type { PaymentMethodItemTypes } from "@/modules/RepaymentMethodData";
 import { RouterConfig } from "@/router/routerConfig";
 import theme from "@/styles/theme";
 import { numFormat, setPageTitle } from "@/utils";
@@ -186,7 +186,7 @@ const RepaymentMethod: FC = () => {
   const [amount, setAmount] = useState<number | string | undefined>();
   const [activeTab, setActiveTab] = useState<number>(0);
   const tabContainerRef = useRef<HTMLDivElement>(null);
-  const [selectMethods, setSelectMethods] = useState<PaymentMethodItemType | null>();
+  const [selectMethods, setSelectMethods] = useState<PaymentMethodItemTypes | null>();
   const [methodIndex, setMethodsIndex] = useState<number | null>();
   useEffect(() => {
     setPageTitle("Loan Payment");
@@ -247,7 +247,7 @@ const RepaymentMethod: FC = () => {
   };
 
   // 选择支付方式
-  const handleSelectMethod = (item: PaymentMethodItemType, index: number) => {
+  const handleSelectMethod = (item: PaymentMethodItemTypes, index: number) => {
     if (item.status == 1) {
       setMethodsIndex(index);
       setSelectMethods(item);
